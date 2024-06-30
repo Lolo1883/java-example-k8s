@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.momo.ws.api.keycloak.examplesimpleservice.ExampleSimpleServiceApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-06-30T17:22:02" hostname="mohamedsMBP612.home" time="0.441">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.momo.ws.api.keycloak.examplesimpleservice.ExampleSimpleServiceApplicationTests" time="0.441"/>
+  <system-out><![CDATA[19:22:02.232 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.momo.ws.api.keycloak.examplesimpleservice.ExampleSimpleServiceApplicationTests]: ExampleSimpleServiceApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:22:02.281 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.momo.ws.api.keycloak.examplesimpleservice.ExampleSimpleServiceApplication for test class com.momo.ws.api.keycloak.examplesimpleservice.ExampleSimpleServiceApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.1)
+
+2024-06-30T19:22:02.442+02:00  INFO 7351 --- [ExampleSimpleService] [    Test worker] k.e.ExampleSimpleServiceApplicationTests : Starting ExampleSimpleServiceApplicationTests using Java 17.0.6 with PID 7351 (started by mohamedlotfy in /Users/mohamedlotfy/IdeaProjects/ExampleSimpleService)
+2024-06-30T19:22:02.443+02:00  INFO 7351 --- [ExampleSimpleService] [    Test worker] k.e.ExampleSimpleServiceApplicationTests : No active profile set, falling back to 1 default profile: "default"
+2024-06-30T19:22:02.951+02:00  INFO 7351 --- [ExampleSimpleService] [    Test worker] k.e.ExampleSimpleServiceApplicationTests : Started ExampleSimpleServiceApplicationTests in 0.605 seconds (process running for 1.118)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
