@@ -1,0 +1,60 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIBeDCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy
+      dmVyLWNhQDE3MTkwNzA3MTQwHhcNMjQwNjIyMTUzODM0WhcNMzQwNjIwMTUzODM0
+      WjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE3MTkwNzA3MTQwWTATBgcqhkjO
+      PQIBBggqhkjOPQMBBwNCAASINP1cpIp/b+w2z/RoNbKwAHcqlb4+opRh6A7ONqmb
+      HXJD5yDQeiLoN/a6uzWYHWSkd7X6pUsi6A99vLZBSAdDo0IwQDAOBgNVHQ8BAf8E
+      BAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUm5lCyEdgRvRCJseDjjOt
+      4uyIkoUwCgYIKoZIzj0EAwIDSQAwRgIhAKJnDz0tsbt7eDFVeX4x5EbQnnRRhBA6
+      rVRRULocNAQoAiEAoDNW99QEgguih8SjpKwRyhVPGaxMGN1rjVVFVULmZTo=
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2024-06-30T18:25:39Z"
+    name: kube-root-ca.crt
+    namespace: greetings-app
+    resourceVersion: "93794"
+    uid: fe9481ea-672f-48e4-adc4-2586bd341e70
+- apiVersion: v1
+  data:
+    root-cert.pem: |
+      -----BEGIN CERTIFICATE-----
+      MIIC/DCCAeSgAwIBAgIQT4OgPHZOKn9ZdiZqLQuiXzANBgkqhkiG9w0BAQsFADAY
+      MRYwFAYDVQQKEw1jbHVzdGVyLmxvY2FsMB4XDTI0MDYzMDE2MjcwMloXDTM0MDYy
+      ODE2MjcwMlowGDEWMBQGA1UEChMNY2x1c3Rlci5sb2NhbDCCASIwDQYJKoZIhvcN
+      AQEBBQADggEPADCCAQoCggEBALHkrutD7g3ohb0GEBIK6i1OqJ+zr4k9xOuiRHFb
+      NQHKDevyjoVAYmhQPyYpDBtAGW16EAv2+HSw9rR/RX//MPpeaJWyXKDAM+rm1xYF
+      vgMKj1AiWQOh1Srv626u3J4TjlnR+gjk7V8PAVpnx29/cUeTssmcHN0YybBo/nT9
+      udB9i9Sh/kUeH/xLAoFPZ9GertA+yDsr571T9I4ZjO1Cz8cpySHYVhmnSRxBYLiw
+      mfClbfMpsbnuvPLZkG8IZTsjHbkZxm8OY4LYN34xyyWWK5FIHgYXgqgKWMFJHWVT
+      ofn2Kzitp11qucDX3k7sx9it2Omj2JRLcu0IWoIzBVGgNhUCAwEAAaNCMEAwDgYD
+      VR0PAQH/BAQDAgIEMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFCuM7TEQIBQe
+      IFOKdPTD8WkoZ74FMA0GCSqGSIb3DQEBCwUAA4IBAQALyg/tzGqoXZ5lPuFRDZfU
+      //OjbWcSz0pWOi/WkK2GOrx+Lu7uZMp67T7hKjdfnZptk0Mg27WaHLfdG19rf/h7
+      ULCzn04Er21Hx77HbCyxTAI7Ep4L+mMA8mikUgGF/K1cOdxawD2eNtF9w3FfyRb6
+      OBD5/umBHU32ApUCXdCgr7oxsuLtFActxG66cBhKRMZfapTUBHorgNmbeGES2OeD
+      xY5yV30ZQjMfWSB+HgyFl9Tlgi0tK4b856KG89jQz74nmz6GWa/5+wSBhOiilTIi
+      h1458rXF0K9p7i5yBjO3fVTfOs7KPuU8g7IS0iWMuF/QKEhK3TyiqHcq6HzcPbXY
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-06-30T18:25:39Z"
+    labels:
+      istio.io/config: "true"
+    name: istio-ca-root-cert
+    namespace: greetings-app
+    resourceVersion: "93795"
+    uid: 785b723f-dd7c-4d0e-9aed-82a9466c889d
+kind: List
+metadata:
+  resourceVersion: ""

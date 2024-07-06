@@ -1,0 +1,140 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2024-06-22T15:38:35Z"
+    labels:
+      kubernetes.io/metadata.name: kube-system
+    name: kube-system
+    resourceVersion: "8"
+    uid: 6c0d658b-fb8e-4acb-8290-cf602fddc723
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2024-06-22T15:38:35Z"
+    labels:
+      kubernetes.io/metadata.name: kube-public
+    name: kube-public
+    resourceVersion: "18"
+    uid: 592af1a0-dfb3-4f07-9501-35061e8b45fd
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2024-06-22T15:38:35Z"
+    labels:
+      kubernetes.io/metadata.name: kube-node-lease
+    name: kube-node-lease
+    resourceVersion: "27"
+    uid: 6abc5f66-1540-4478-86e8-fd41a65f3038
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2024-06-22T15:38:35Z"
+    labels:
+      kubernetes.io/metadata.name: default
+    name: default
+    resourceVersion: "38"
+    uid: 236220b6-e9af-42a7-a715-0b912af451f8
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2024-06-30T16:26:50Z"
+    labels:
+      kubernetes.io/metadata.name: istio-system
+    name: istio-system
+    resourceVersion: "87522"
+    uid: ac71de12-8aa9-43de-ae73-c163a4532f92
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"name":"kafka"}}
+    creationTimestamp: "2024-06-22T16:19:57Z"
+    labels:
+      istio-injection: enabled
+      kubernetes.io/metadata.name: kafka
+    name: kafka
+    resourceVersion: "87810"
+    uid: f0d7cdcf-770d-420d-8d30-fd28a4e4be64
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2024-06-30T18:23:34Z"
+    labels:
+      kubernetes.io/metadata.name: argocd
+    name: argocd
+    resourceVersion: "93365"
+    uid: 09d8f3b7-ea65-4d05-98c4-942ea551ae0a
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    creationTimestamp: "2024-06-30T18:25:39Z"
+    labels:
+      kubernetes.io/metadata.name: greetings-app
+    name: greetings-app
+    resourceVersion: "93792"
+    uid: 42a2582a-091a-492c-af3a-24aae0e6fb6c
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Namespace","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/name":"ingress-nginx"},"name":"ingress-nginx"}}
+    creationTimestamp: "2024-06-30T18:54:22Z"
+    labels:
+      app.kubernetes.io/instance: ingress-nginx
+      app.kubernetes.io/name: ingress-nginx
+      kubernetes.io/metadata.name: ingress-nginx
+    name: ingress-nginx
+    resourceVersion: "95922"
+    uid: 66530a79-c0e9-4a9b-87b7-809867d8f555
+  spec:
+    finalizers:
+    - kubernetes
+  status:
+    phase: Active
+kind: List
+metadata:
+  resourceVersion: ""

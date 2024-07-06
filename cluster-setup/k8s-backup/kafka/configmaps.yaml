@@ -1,0 +1,418 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIBeDCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy
+      dmVyLWNhQDE3MTkwNzA3MTQwHhcNMjQwNjIyMTUzODM0WhcNMzQwNjIwMTUzODM0
+      WjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE3MTkwNzA3MTQwWTATBgcqhkjO
+      PQIBBggqhkjOPQMBBwNCAASINP1cpIp/b+w2z/RoNbKwAHcqlb4+opRh6A7ONqmb
+      HXJD5yDQeiLoN/a6uzWYHWSkd7X6pUsi6A99vLZBSAdDo0IwQDAOBgNVHQ8BAf8E
+      BAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUm5lCyEdgRvRCJseDjjOt
+      4uyIkoUwCgYIKoZIzj0EAwIDSQAwRgIhAKJnDz0tsbt7eDFVeX4x5EbQnnRRhBA6
+      rVRRULocNAQoAiEAoDNW99QEgguih8SjpKwRyhVPGaxMGN1rjVVFVULmZTo=
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2024-06-22T16:19:57Z"
+    name: kube-root-ca.crt
+    namespace: kafka
+    resourceVersion: "3172"
+    uid: 087e3adb-7ea1-495b-9727-3cdcc8334293
+- apiVersion: v1
+  data:
+    log4j2.properties: |
+      name = COConfig
+      monitorInterval = 30
+
+      appender.console.type = Console
+      appender.console.name = STDOUT
+      appender.console.layout.type = PatternLayout
+      appender.console.layout.pattern = %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+
+      rootLogger.level = ${env:STRIMZI_LOG_LEVEL:-INFO}
+      rootLogger.appenderRefs = stdout
+      rootLogger.appenderRef.console.ref = STDOUT
+
+      # Kafka AdminClient logging is a bit noisy at INFO level
+      logger.kafka.name = org.apache.kafka
+      logger.kafka.level = WARN
+
+      # Zookeeper is very verbose even on INFO level -> We set it to WARN by default
+      logger.zookeepertrustmanager.name = org.apache.zookeeper
+      logger.zookeepertrustmanager.level = WARN
+
+      # Keeps separate level for Netty logging -> to not be changed by the root logger
+      logger.netty.name = io.netty
+      logger.netty.level = INFO
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"log4j2.properties":"name = COConfig\nmonitorInterval = 30\n\nappender.console.type = Console\nappender.console.name = STDOUT\nappender.console.layout.type = PatternLayout\nappender.console.layout.pattern = %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n\n\nrootLogger.level = ${env:STRIMZI_LOG_LEVEL:-INFO}\nrootLogger.appenderRefs = stdout\nrootLogger.appenderRef.console.ref = STDOUT\n\n# Kafka AdminClient logging is a bit noisy at INFO level\nlogger.kafka.name = org.apache.kafka\nlogger.kafka.level = WARN\n\n# Zookeeper is very verbose even on INFO level -\u003e We set it to WARN by default\nlogger.zookeepertrustmanager.name = org.apache.zookeeper\nlogger.zookeepertrustmanager.level = WARN\n\n# Keeps separate level for Netty logging -\u003e to not be changed by the root logger\nlogger.netty.name = io.netty\nlogger.netty.level = INFO\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app":"strimzi"},"name":"strimzi-cluster-operator","namespace":"kafka"}}
+    creationTimestamp: "2024-06-22T16:19:57Z"
+    labels:
+      app: strimzi
+    name: strimzi-cluster-operator
+    namespace: kafka
+    resourceVersion: "3204"
+    uid: 6a813db3-459c-404b-9dfa-c48dd52c5e04
+- apiVersion: v1
+  data:
+    log4j.properties: |
+      # Do not change this generated file. Logging can be configured in the corresponding Kubernetes resource.
+      log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+      log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+      log4j.appender.CONSOLE.layout.ConversionPattern=%d{ISO8601} %p %m (%c) [%t]%n
+      zookeeper.root.logger=INFO
+      log4j.rootLogger=${zookeeper.root.logger}, CONSOLE
+    zookeeper.node-count: "1"
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-06-22T16:20:05Z"
+    labels:
+      app.kubernetes.io/instance: my-cluster
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: zookeeper
+      app.kubernetes.io/part-of: strimzi-my-cluster
+      strimzi.io/cluster: my-cluster
+      strimzi.io/component-type: zookeeper
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-zookeeper
+    name: my-cluster-zookeeper-config
+    namespace: kafka
+    ownerReferences:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      blockOwnerDeletion: false
+      controller: false
+      kind: Kafka
+      name: my-cluster
+      uid: ea0e3b51-6464-43ff-a195-0d26497efea5
+    resourceVersion: "3265"
+    uid: 0e7d371c-99a6-4959-962d-138e85ea511c
+- apiVersion: v1
+  data:
+    listeners.config: PLAIN_9092 TLS_9093
+    log4j.properties: |
+      # Do not change this generated file. Logging can be configured in the corresponding Kubernetes resource.
+      log4j.appender.CONSOLE=org.apache.log4j.ConsoleAppender
+      log4j.appender.CONSOLE.layout=org.apache.log4j.PatternLayout
+      log4j.appender.CONSOLE.layout.ConversionPattern=%d{ISO8601} %p %m (%c) [%t]%n
+      kafka.root.logger.level=INFO
+      log4j.rootLogger=${kafka.root.logger.level}, CONSOLE
+      log4j.logger.org.apache.zookeeper=INFO
+      log4j.logger.kafka=INFO
+      log4j.logger.org.apache.kafka=INFO
+      log4j.logger.kafka.request.logger=WARN, CONSOLE
+      log4j.logger.kafka.network.Processor=OFF
+      log4j.logger.kafka.server.KafkaApis=OFF
+      log4j.logger.kafka.network.RequestChannel$=WARN
+      log4j.logger.kafka.controller=TRACE
+      log4j.logger.org.apache.kafka.controller=INFO
+      log4j.logger.kafka.log.LogCleaner=INFO
+      log4j.logger.state.change.logger=TRACE
+      log4j.logger.kafka.authorizer.logger=INFO
+    metadata.state: "0"
+    server.config: |-
+      ##############################
+      ##############################
+      # This file is automatically generated by the Strimzi Cluster Operator
+      # Any changes to this file will be ignored and overwritten!
+      ##############################
+      ##############################
+
+      ##########
+      # Node / Broker ID
+      ##########
+      node.id=0
+      broker.id=0
+
+      ##########
+      # Kafka message logs configuration
+      ##########
+      log.dirs=/var/lib/kafka/data-0/kafka-log0
+
+      ##########
+      # Control Plane listener
+      ##########
+      listener.name.controlplane-9090.ssl.keystore.location=/tmp/kafka/cluster.keystore.p12
+      listener.name.controlplane-9090.ssl.keystore.password=${CERTS_STORE_PASSWORD}
+      listener.name.controlplane-9090.ssl.keystore.type=PKCS12
+      listener.name.controlplane-9090.ssl.truststore.location=/tmp/kafka/cluster.truststore.p12
+      listener.name.controlplane-9090.ssl.truststore.password=${CERTS_STORE_PASSWORD}
+      listener.name.controlplane-9090.ssl.truststore.type=PKCS12
+      listener.name.controlplane-9090.ssl.client.auth=required
+
+      ##########
+      # Replication listener
+      ##########
+      listener.name.replication-9091.ssl.keystore.location=/tmp/kafka/cluster.keystore.p12
+      listener.name.replication-9091.ssl.keystore.password=${CERTS_STORE_PASSWORD}
+      listener.name.replication-9091.ssl.keystore.type=PKCS12
+      listener.name.replication-9091.ssl.truststore.location=/tmp/kafka/cluster.truststore.p12
+      listener.name.replication-9091.ssl.truststore.password=${CERTS_STORE_PASSWORD}
+      listener.name.replication-9091.ssl.truststore.type=PKCS12
+      listener.name.replication-9091.ssl.client.auth=required
+
+      ##########
+      # Listener configuration: PLAIN-9092
+      ##########
+
+      ##########
+      # Listener configuration: TLS-9093
+      ##########
+      listener.name.tls-9093.ssl.keystore.location=/tmp/kafka/cluster.keystore.p12
+      listener.name.tls-9093.ssl.keystore.password=${CERTS_STORE_PASSWORD}
+      listener.name.tls-9093.ssl.keystore.type=PKCS12
+
+
+      ##########
+      # Common listener configuration
+      ##########
+      listener.security.protocol.map=CONTROLPLANE-9090:SSL,REPLICATION-9091:SSL,PLAIN-9092:PLAINTEXT,TLS-9093:SSL
+      listeners=CONTROLPLANE-9090://0.0.0.0:9090,REPLICATION-9091://0.0.0.0:9091,PLAIN-9092://0.0.0.0:9092,TLS-9093://0.0.0.0:9093
+      advertised.listeners=CONTROLPLANE-9090://my-cluster-kafka-0.my-cluster-kafka-brokers.kafka.svc:9090,REPLICATION-9091://my-cluster-kafka-0.my-cluster-kafka-brokers.kafka.svc:9091,PLAIN-9092://my-cluster-kafka-0.my-cluster-kafka-brokers.kafka.svc:9092,TLS-9093://my-cluster-kafka-0.my-cluster-kafka-brokers.kafka.svc:9093
+      inter.broker.listener.name=REPLICATION-9091
+      control.plane.listener.name=CONTROLPLANE-9090
+      sasl.enabled.mechanisms=
+      ssl.endpoint.identification.algorithm=HTTPS
+
+      ##########
+      # User provided configuration
+      ##########
+      default.replication.factor=1
+      inter.broker.protocol.version=3.7
+      min.insync.replicas=1
+      offsets.topic.replication.factor=1
+      transaction.state.log.min.isr=1
+      transaction.state.log.replication.factor=1
+      log.message.format.version=3.7
+
+
+      ##########
+      # Zookeeper
+      ##########
+      zookeeper.connect=my-cluster-zookeeper-client:2181
+      zookeeper.clientCnxnSocket=org.apache.zookeeper.ClientCnxnSocketNetty
+      zookeeper.ssl.client.enable=true
+      zookeeper.ssl.keystore.location=/tmp/kafka/cluster.keystore.p12
+      zookeeper.ssl.keystore.password=${CERTS_STORE_PASSWORD}
+      zookeeper.ssl.keystore.type=PKCS12
+      zookeeper.ssl.truststore.location=/tmp/kafka/cluster.truststore.p12
+      zookeeper.ssl.truststore.password=${CERTS_STORE_PASSWORD}
+      zookeeper.ssl.truststore.type=PKCS12
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-06-22T16:21:06Z"
+    labels:
+      app.kubernetes.io/instance: my-cluster
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: kafka
+      app.kubernetes.io/part-of: strimzi-my-cluster
+      strimzi.io/cluster: my-cluster
+      strimzi.io/component-type: kafka
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-kafka
+      strimzi.io/pod-name: my-cluster-kafka-0
+      strimzi.io/pool-name: kafka
+    name: my-cluster-kafka-0
+    namespace: kafka
+    ownerReferences:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      blockOwnerDeletion: false
+      controller: false
+      kind: Kafka
+      name: my-cluster
+      uid: ea0e3b51-6464-43ff-a195-0d26497efea5
+    resourceVersion: "3424"
+    uid: 4c11d0ec-9982-4a25-a187-4f09bfa85243
+- apiVersion: v1
+  data:
+    log4j2.properties: |
+      # Do not change this generated file. Logging can be configured in the corresponding Kubernetes resource.
+      name=TOConfig
+      appender.console.type=Console
+      appender.console.name=STDOUT
+      appender.console.layout.type=PatternLayout
+      appender.console.layout.pattern=%d{yyyy-MM-dd HH:mm:ss,nnnnn} %-5p [%t] %c{1}:%L - %m%n
+      rootLogger.level=INFO
+      rootLogger.appenderRefs=stdout
+      rootLogger.appenderRef.console.ref=STDOUT
+      rootLogger.additivity=false
+      logger.jetty.name=org.eclipse.jetty
+      logger.jetty.level=INFO
+      logger.jetty.additivity=false
+      logger.clients.name=org.apache.kafka.clients
+      logger.clients.level=INFO
+      logger.clients.additivity=false
+      logger.streams.name=org.apache.kafka.streams
+      logger.streams.level=INFO
+      logger.streams.additivity=false
+
+      monitorInterval=30
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-06-22T16:21:33Z"
+    labels:
+      app.kubernetes.io/instance: my-cluster
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: entity-topic-operator
+      app.kubernetes.io/part-of: strimzi-my-cluster
+      strimzi.io/cluster: my-cluster
+      strimzi.io/component-type: entity-topic-operator
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-entity-topic-operator
+    name: my-cluster-entity-topic-operator-config
+    namespace: kafka
+    ownerReferences:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      blockOwnerDeletion: false
+      controller: false
+      kind: Kafka
+      name: my-cluster
+      uid: ea0e3b51-6464-43ff-a195-0d26497efea5
+    resourceVersion: "3526"
+    uid: 78b28a16-24c0-40d9-b2d3-d07ad1e31d47
+- apiVersion: v1
+  data:
+    log4j2.properties: |
+      # Do not change this generated file. Logging can be configured in the corresponding Kubernetes resource.
+      name=UOConfig
+      appender.console.type=Console
+      appender.console.name=STDOUT
+      appender.console.layout.type=PatternLayout
+      appender.console.layout.pattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
+      rootLogger.level=INFO
+      rootLogger.appenderRefs=stdout
+      rootLogger.appenderRef.console.ref=STDOUT
+      rootLogger.additivity=false
+      logger.jetty.name=org.eclipse.jetty
+      logger.jetty.level=INFO
+      logger.jetty.additivity=false
+
+      monitorInterval=30
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-06-22T16:21:33Z"
+    labels:
+      app.kubernetes.io/instance: my-cluster
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: entity-user-operator
+      app.kubernetes.io/part-of: strimzi-my-cluster
+      strimzi.io/cluster: my-cluster
+      strimzi.io/component-type: entity-user-operator
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-entity-user-operator
+    name: my-cluster-entity-user-operator-config
+    namespace: kafka
+    ownerReferences:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      blockOwnerDeletion: false
+      controller: false
+      kind: Kafka
+      name: my-cluster
+      uid: ea0e3b51-6464-43ff-a195-0d26497efea5
+    resourceVersion: "3527"
+    uid: 06069f96-c3ab-496e-a649-9a84dbad390e
+- apiVersion: v1
+  data:
+    application.yml: |
+      akhq:
+        server:
+          access-log:
+            enabled: false
+            name: org.akhq.log.access
+  kind: ConfigMap
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: akhq
+      meta.helm.sh/release-namespace: kafka
+    creationTimestamp: "2024-06-23T12:17:16Z"
+    labels:
+      app.kubernetes.io/instance: akhq
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: akhq
+      helm.sh/chart: akhq-0.25.0
+    name: akhq
+    namespace: kafka
+    resourceVersion: "23972"
+    uid: 558cfd48-bf89-41b6-98b6-582f0e6ce0c2
+- apiVersion: v1
+  data:
+    application.yml: |
+      micronaut:
+        server:
+          port: 8080
+          cors:
+            enabled: true
+            configurations:
+              all:
+                allowedOrigins:
+                  - http://localhost:3000
+        security:
+          token:
+            jwt:
+              signatures:
+                secret:
+                  generator:
+                    secret: OhDKxFvulWISlWG8lcmCiyjCt0iJVuzatYDT7LvwWy8=
+      akhq:
+        connections:
+          local:
+            properties:
+              bootstrap.servers: "my-cluster-kafka-bootstrap.kafka:9092"
+              security.protocol: "PLAINTEXT"
+            schema-registry:
+              url: "http://schema-registry.kafka:8081"
+            connect:
+              - name: "my-connect-cluster"
+                url: "http://my-connect-cluster.kafka:8083"
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"application.yml":"micronaut:\n  server:\n    port: 8080\n    cors:\n      enabled: true\n      configurations:\n        all:\n          allowedOrigins:\n            - http://localhost:3000\n  security:\n    token:\n      jwt:\n        signatures:\n          secret:\n            generator:\n              secret: OhDKxFvulWISlWG8lcmCiyjCt0iJVuzatYDT7LvwWy8=\nakhq:\n  connections:\n    local:\n      properties:\n        bootstrap.servers: \"my-cluster-kafka-bootstrap.kafka:9092\"\n        security.protocol: \"PLAINTEXT\"\n      schema-registry:\n        url: \"http://schema-registry.kafka:8081\"\n      connect:\n        - name: \"my-connect-cluster\"\n          url: \"http://my-connect-cluster.kafka:8083\"\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"akhq-config","namespace":"kafka"}}
+    creationTimestamp: "2024-06-22T16:36:27Z"
+    name: akhq-config
+    namespace: kafka
+    resourceVersion: "82929"
+    uid: 1ba1c790-1325-446e-86b4-a972eae77089
+- apiVersion: v1
+  data:
+    root-cert.pem: |
+      -----BEGIN CERTIFICATE-----
+      MIIC/DCCAeSgAwIBAgIQT4OgPHZOKn9ZdiZqLQuiXzANBgkqhkiG9w0BAQsFADAY
+      MRYwFAYDVQQKEw1jbHVzdGVyLmxvY2FsMB4XDTI0MDYzMDE2MjcwMloXDTM0MDYy
+      ODE2MjcwMlowGDEWMBQGA1UEChMNY2x1c3Rlci5sb2NhbDCCASIwDQYJKoZIhvcN
+      AQEBBQADggEPADCCAQoCggEBALHkrutD7g3ohb0GEBIK6i1OqJ+zr4k9xOuiRHFb
+      NQHKDevyjoVAYmhQPyYpDBtAGW16EAv2+HSw9rR/RX//MPpeaJWyXKDAM+rm1xYF
+      vgMKj1AiWQOh1Srv626u3J4TjlnR+gjk7V8PAVpnx29/cUeTssmcHN0YybBo/nT9
+      udB9i9Sh/kUeH/xLAoFPZ9GertA+yDsr571T9I4ZjO1Cz8cpySHYVhmnSRxBYLiw
+      mfClbfMpsbnuvPLZkG8IZTsjHbkZxm8OY4LYN34xyyWWK5FIHgYXgqgKWMFJHWVT
+      ofn2Kzitp11qucDX3k7sx9it2Omj2JRLcu0IWoIzBVGgNhUCAwEAAaNCMEAwDgYD
+      VR0PAQH/BAQDAgIEMA8GA1UdEwEB/wQFMAMBAf8wHQYDVR0OBBYEFCuM7TEQIBQe
+      IFOKdPTD8WkoZ74FMA0GCSqGSIb3DQEBCwUAA4IBAQALyg/tzGqoXZ5lPuFRDZfU
+      //OjbWcSz0pWOi/WkK2GOrx+Lu7uZMp67T7hKjdfnZptk0Mg27WaHLfdG19rf/h7
+      ULCzn04Er21Hx77HbCyxTAI7Ep4L+mMA8mikUgGF/K1cOdxawD2eNtF9w3FfyRb6
+      OBD5/umBHU32ApUCXdCgr7oxsuLtFActxG66cBhKRMZfapTUBHorgNmbeGES2OeD
+      xY5yV30ZQjMfWSB+HgyFl9Tlgi0tK4b856KG89jQz74nmz6GWa/5+wSBhOiilTIi
+      h1458rXF0K9p7i5yBjO3fVTfOs7KPuU8g7IS0iWMuF/QKEhK3TyiqHcq6HzcPbXY
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-06-30T16:27:03Z"
+    labels:
+      istio.io/config: "true"
+    name: istio-ca-root-cert
+    namespace: kafka
+    resourceVersion: "87632"
+    uid: 4247bd16-fe93-45da-bbfa-1b3f3f722f4c
+kind: List
+metadata:
+  resourceVersion: ""

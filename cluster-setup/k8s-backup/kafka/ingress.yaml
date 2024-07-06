@@ -1,0 +1,38 @@
+apiVersion: v1
+items:
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"traefik.ingress.kubernetes.io/router.entrypoints":"web"},"name":"akhq-ingress","namespace":"kafka"},"spec":{"rules":[{"host":"akhq.local","http":{"paths":[{"backend":{"service":{"name":"akhq","port":{"number":8080}}},"path":"/","pathType":"Prefix"}]}}]}}
+      traefik.ingress.kubernetes.io/router.entrypoints: web
+    creationTimestamp: "2024-06-23T16:30:41Z"
+    generation: 8
+    name: akhq-ingress
+    namespace: kafka
+    resourceVersion: "71369"
+    uid: 6cb514c2-7f6b-4387-acb4-d76e262c4b72
+  spec:
+    ingressClassName: traefik
+    rules:
+    - host: akhq.local
+      http:
+        paths:
+        - backend:
+            service:
+              name: akhq
+              port:
+                number: 8080
+          path: /
+          pathType: Prefix
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 172.20.0.3
+      - ip: 172.20.0.4
+      - ip: 172.20.0.5
+      - ip: 172.20.0.6
+kind: List
+metadata:
+  resourceVersion: ""

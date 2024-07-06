@@ -1,0 +1,321 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-06-22T16:20:05Z"
+    labels:
+      app.kubernetes.io/instance: my-cluster
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: zookeeper
+      app.kubernetes.io/part-of: strimzi-my-cluster
+      strimzi.io/cluster: my-cluster
+      strimzi.io/component-type: zookeeper
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-zookeeper
+    name: my-cluster-zookeeper-client
+    namespace: kafka
+    ownerReferences:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      blockOwnerDeletion: false
+      controller: false
+      kind: Kafka
+      name: my-cluster
+      uid: ea0e3b51-6464-43ff-a195-0d26497efea5
+    resourceVersion: "3258"
+    uid: fb943127-8324-4b26-ab2e-7dcfdb625a5f
+  spec:
+    clusterIP: 10.43.6.163
+    clusterIPs:
+    - 10.43.6.163
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-clients
+      port: 2181
+      protocol: TCP
+      targetPort: 2181
+    selector:
+      strimzi.io/cluster: my-cluster
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-zookeeper
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-06-22T16:20:05Z"
+    labels:
+      app.kubernetes.io/instance: my-cluster
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: zookeeper
+      app.kubernetes.io/part-of: strimzi-my-cluster
+      strimzi.io/cluster: my-cluster
+      strimzi.io/component-type: zookeeper
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-zookeeper
+    name: my-cluster-zookeeper-nodes
+    namespace: kafka
+    ownerReferences:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      blockOwnerDeletion: false
+      controller: false
+      kind: Kafka
+      name: my-cluster
+      uid: ea0e3b51-6464-43ff-a195-0d26497efea5
+    resourceVersion: "3261"
+    uid: e5344536-0be3-48e6-84dd-ad09e57376ab
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-clients
+      port: 2181
+      protocol: TCP
+      targetPort: 2181
+    - name: tcp-clustering
+      port: 2888
+      protocol: TCP
+      targetPort: 2888
+    - name: tcp-election
+      port: 3888
+      protocol: TCP
+      targetPort: 3888
+    publishNotReadyAddresses: true
+    selector:
+      strimzi.io/cluster: my-cluster
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-zookeeper
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      strimzi.io/discovery: |-
+        [ {
+          "port" : 9092,
+          "tls" : false,
+          "protocol" : "kafka",
+          "auth" : "none"
+        }, {
+          "port" : 9093,
+          "tls" : true,
+          "protocol" : "kafka",
+          "auth" : "none"
+        } ]
+    creationTimestamp: "2024-06-22T16:21:05Z"
+    labels:
+      app.kubernetes.io/instance: my-cluster
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: kafka
+      app.kubernetes.io/part-of: strimzi-my-cluster
+      strimzi.io/cluster: my-cluster
+      strimzi.io/component-type: kafka
+      strimzi.io/discovery: "true"
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-kafka
+    name: my-cluster-kafka-bootstrap
+    namespace: kafka
+    ownerReferences:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      blockOwnerDeletion: false
+      controller: false
+      kind: Kafka
+      name: my-cluster
+      uid: ea0e3b51-6464-43ff-a195-0d26497efea5
+    resourceVersion: "3415"
+    uid: 39a377d3-186d-4f48-baee-1a5424c120a2
+  spec:
+    clusterIP: 10.43.42.51
+    clusterIPs:
+    - 10.43.42.51
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-replication
+      port: 9091
+      protocol: TCP
+      targetPort: 9091
+    - name: tcp-clients
+      port: 9092
+      protocol: TCP
+      targetPort: 9092
+    - name: tcp-clientstls
+      port: 9093
+      protocol: TCP
+      targetPort: 9093
+    selector:
+      strimzi.io/cluster: my-cluster
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-kafka
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-06-22T16:21:05Z"
+    labels:
+      app.kubernetes.io/instance: my-cluster
+      app.kubernetes.io/managed-by: strimzi-cluster-operator
+      app.kubernetes.io/name: kafka
+      app.kubernetes.io/part-of: strimzi-my-cluster
+      strimzi.io/cluster: my-cluster
+      strimzi.io/component-type: kafka
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-kafka
+    name: my-cluster-kafka-brokers
+    namespace: kafka
+    ownerReferences:
+    - apiVersion: kafka.strimzi.io/v1beta2
+      blockOwnerDeletion: false
+      controller: false
+      kind: Kafka
+      name: my-cluster
+      uid: ea0e3b51-6464-43ff-a195-0d26497efea5
+    resourceVersion: "3418"
+    uid: 6fea0f16-b523-4358-a1fa-75c9d5648a81
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: tcp-ctrlplane
+      port: 9090
+      protocol: TCP
+      targetPort: 9090
+    - name: tcp-replication
+      port: 9091
+      protocol: TCP
+      targetPort: 9091
+    - name: tcp-kafkaagent
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+    - name: tcp-clients
+      port: 9092
+      protocol: TCP
+      targetPort: 9092
+    - name: tcp-clientstls
+      port: 9093
+      protocol: TCP
+      targetPort: 9093
+    publishNotReadyAddresses: true
+    selector:
+      strimzi.io/cluster: my-cluster
+      strimzi.io/kind: Kafka
+      strimzi.io/name: my-cluster-kafka
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"akhq","namespace":"kafka"},"spec":{"ports":[{"port":8080,"protocol":"TCP","targetPort":8080}],"selector":{"app":"akhq"},"type":"ClusterIP"}}
+    creationTimestamp: "2024-06-26T19:25:40Z"
+    name: akhq
+    namespace: kafka
+    resourceVersion: "82125"
+    uid: 23de60d6-2f0a-4fe8-9b71-9ecec0042ec7
+  spec:
+    clusterIP: 10.43.227.124
+    clusterIPs:
+    - 10.43.227.124
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+    selector:
+      app: akhq
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"schema-registry","namespace":"kafka"},"spec":{"ports":[{"port":8081,"protocol":"TCP","targetPort":8081}],"selector":{"app":"schema-registry"},"type":"ClusterIP"}}
+    creationTimestamp: "2024-06-26T19:38:45Z"
+    name: schema-registry
+    namespace: kafka
+    resourceVersion: "82885"
+    uid: f949bad7-b169-4854-815b-cf5e757ce2ac
+  spec:
+    clusterIP: 10.43.140.128
+    clusterIPs:
+    - 10.43.140.128
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8081
+      protocol: TCP
+      targetPort: 8081
+    selector:
+      app: schema-registry
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"my-connect-cluster","namespace":"kafka"},"spec":{"ports":[{"port":8083,"protocol":"TCP","targetPort":8083}],"selector":{"strimzi.io/cluster":"my-connect-cluster","strimzi.io/kind":"KafkaConnect"},"type":"ClusterIP"}}
+    creationTimestamp: "2024-06-26T19:38:53Z"
+    name: my-connect-cluster
+    namespace: kafka
+    resourceVersion: "82899"
+    uid: 230e5145-a1e3-4e97-a572-d30cfb9b7a64
+  spec:
+    clusterIP: 10.43.8.58
+    clusterIPs:
+    - 10.43.8.58
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 8083
+      protocol: TCP
+      targetPort: 8083
+    selector:
+      strimzi.io/cluster: my-connect-cluster
+      strimzi.io/kind: KafkaConnect
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
